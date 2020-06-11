@@ -1,0 +1,621 @@
+openapi: 3.0.0
+info:
+  title: UnifiedMyAccount
+  version: '1.0'
+servers:
+  - url: 'http://localhost:3000'
+paths:
+  '/subscription/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Subscription'
+            application/xml:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+            application/xml:
+              schema:
+                $ref: '#/components/schemas/Error'
+      operationId: get-subscription-userId
+    post:
+      summary: ''
+      operationId: post-subscription-userId
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+          application/xml:
+            schema:
+              $ref: '#/components/schemas/SubscriptionGet'
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+    put:
+      summary: ''
+      operationId: put-subscription-userId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionGet'
+        '400':
+          description: Bad Request
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SubscriptionGet'
+  '/user/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: get-user-userId
+    put:
+      summary: ''
+      operationId: put-user-userId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '501':
+          description: Not Implemented
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BillingAddress'
+  '/paymentMethod/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/PaymentMethod'
+        '501':
+          description: Not Implemented
+      operationId: get-paymentMethod-userId
+    post:
+      summary: ''
+      operationId: post-paymentMethod-userId
+      responses:
+        '201':
+          description: Created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentMethod'
+  '/bill/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Bill'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: get-bill-userId
+    post:
+      summary: ''
+      operationId: post-bill-userId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Bill'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Bill'
+  '/subscriptionDetails/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SubscriptionDetails'
+      operationId: get-subscriptionDetails-userId
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    post:
+      summary: ''
+      operationId: post-subscriptionDetails-userId
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Subscription'
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Subscription'
+  '/subscription/{userId}/devices':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Device'
+      operationId: get-subscription-userId-devices
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties: {}
+    post:
+      summary: ''
+      operationId: post-subscription-userId-devices
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Device'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+      parameters:
+        - schema:
+            type: string
+          in: query
+          name: subscriptionId
+    delete:
+      summary: ''
+      operationId: delete-subscription-userId-devices
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Device'
+  '/unterbruch/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Unterbruch'
+        '401':
+          description: Unauthorized
+        '500':
+          description: Internal Server Error
+      operationId: get-unterbruch-userId
+    post:
+      summary: ''
+      operationId: post-unterbruch-userId
+      responses:
+        '200':
+          description: OK
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Unterbruch'
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Unterbruch'
+  '/umleitung/{userId}':
+    parameters:
+      - schema:
+          type: string
+        name: userId
+        in: path
+        required: true
+    get:
+      summary: Your GET endpoint
+      tags: []
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Umleitung'
+        '500':
+          description: Internal Server Error
+      operationId: get-umleitung-userId
+    post:
+      summary: ''
+      operationId: post-umleitung-userId
+      responses:
+        '200':
+          description: OK
+        '500':
+          description: Internal Server Error
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Umleitung'
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      properties:
+        email:
+          type: string
+        password:
+          type: string
+        address:
+          type: string
+        billingAddress:
+          type: string
+        userId:
+          type: string
+        userNumber:
+          type: string
+        name:
+          type: string
+        '':
+          type: string
+    BillingAddress:
+      title: BillingAddress
+      type: object
+      properties:
+        name:
+          type: string
+        address:
+          type: string
+        streetAndNumber:
+          type: string
+        place:
+          type: string
+        zip:
+          type: string
+        userId:
+          type: string
+        addressOfLiving:
+          type: boolean
+    Device:
+      title: Device
+      type: object
+      properties:
+        id:
+          type: string
+        deviceName:
+          type: string
+        place:
+          type: string
+        lastUsage:
+          type: string
+        userID:
+          type: string
+        subsciptionID:
+          type: string
+        subscriptionName:
+          type: string
+    PaymentMethod:
+      title: PaymentMethod
+      type: object
+      properties:
+        id:
+          type: string
+        alias:
+          type: string
+        maskedNumber:
+          type: string
+        userId:
+          type: string
+        nameOfSubscription:
+          type: string
+    Bill:
+      title: Bill
+      type: object
+      properties:
+        id:
+          type: string
+        date:
+          type: string
+        dateFrom:
+          type: string
+        summe:
+          type: string
+        status:
+          type: string
+        userId:
+          type: string
+        sendChannelId:
+          type: string
+    SubscriptionDetails:
+      title: SubscriptionDetails
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        paymentMethod:
+          type: string
+        billDelivery:
+          type: string
+        status:
+          type: string
+        address:
+          type: string
+        billingAddress:
+          type: string
+        userId:
+          type: string
+        type:
+          type: string
+        productDescription:
+          type: string
+        active:
+          type: boolean
+        client:
+          type: string
+        '':
+          type: string
+    Subscription:
+      title: Subscription
+      type: object
+      properties:
+        subscriptionId:
+          type: string
+        name:
+          type: string
+        type:
+          type: string
+        dateFrom:
+          type: string
+        dateTo:
+          type: string
+        address:
+          type: string
+        userId:
+          type: string
+        active:
+          type: boolean
+        userName:
+          type: string
+    Error:
+      title: Error
+      type: object
+      properties:
+        code:
+          type: integer
+        message:
+          type: string
+    CancelationPeriod:
+      title: CancelationPeriod
+      type: object
+      properties:
+        id:
+          type: string
+        subscriptionId:
+          type: string
+        dateFrom:
+          type: string
+        dateTo:
+          type: string
+    Unterbruch:
+      title: Unterbruch
+      type: object
+      properties:
+        id:
+          type: string
+        SubscriptionId:
+          type: string
+        SubscriptionName:
+          type: string
+        Type:
+          type: string
+        DateFrom:
+          type: string
+        DateTo:
+          type: string
+        userId:
+          type: string
+    Umleitung:
+      title: Umleitung
+      type: object
+      properties:
+        id:
+          type: string
+        SubscriptionId:
+          type: string
+        DateFrom:
+          type: string
+        DateTo:
+          type: string
+        Name:
+          type: string
+        Address:
+          type: string
+        Street:
+          type: string
+        Number:
+          type: string
+        PLZ:
+          type: string
+        City:
+          type: string
+        userId:
+          type: string
